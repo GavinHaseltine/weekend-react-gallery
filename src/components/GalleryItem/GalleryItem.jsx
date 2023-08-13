@@ -1,6 +1,2 @@
-import { GalleryList } from "../GalleryList/GalleryList"
-export function GalleryItem(galleryItem) {
-
-    console.log(galleryItem)
-    return
-}
+import axios from "axios";
+import { useState, useEffect } from "react";

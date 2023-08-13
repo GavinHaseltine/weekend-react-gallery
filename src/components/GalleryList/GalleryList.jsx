@@ -1,22 +1,22 @@
 import axios from "axios"
-//import galleryItems from "../../../server/modules/gallery.data";
 
-export function GalleryList(galleryList) {
+export function GalleryList({galleryList}) {
 
 const handleClick = () =>{
     console.log("clicked!")
         
 }
 
-const handleLike = () => {
+ function handleLike (galleryItems) {
 
     axios
-            .put(`/gallery/like/:id`)
+            .put(`/gallery/like/${galleryItems.id}`)
             .then((response) => {
+                console.log("in handleLike", response)
                 //getGallery();
             })
             .catch((error) => {
-                console.log(`Error in handleBuy ${error}`);
+                console.log(`Error in handleLike ${error}`);
                 alert("Something went wrong!!!");
             });
     };
@@ -28,7 +28,7 @@ const handleLike = () => {
          <img onClick={handleClick} src={galleryItems.path}/>
          <p> {galleryItems.description} </p>
          <p> Number of likes: {galleryItems.likes} </p>
-         <button onClick={handleLike}>Like This!!</button>
+         <button onClick={handleLike(galleryItems.id)}>Like This!!</button>
         </li>
       ))}
     </>;
