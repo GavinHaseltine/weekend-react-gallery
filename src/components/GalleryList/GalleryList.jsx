@@ -2,18 +2,19 @@ import axios from "axios"
 import { useState, useEffect } from "react";
 import GalleryItem from "../GalleryItem/GalleryItem";
 
+//Runs on start
 export function GalleryList() {
-
+ 
     const [galleryItem, setGalleryItem] = useState([]);
 
 
 
-
+ //GETs the galleryList array
     let getGallery = () => {
         axios.get('/gallery')
             .then(response => {
-                // console.log('Get response is', response.data)
-                setGalleryItem(response.data) // confirm this is the right thing to take here
+                
+                setGalleryItem(response.data) 
                 console.log("in getGallery", response.data)
             })
             .catch(error => {
@@ -21,12 +22,12 @@ export function GalleryList() {
             })
       }
       
-      
+      //On startup pretty much
       useEffect(() => {
         getGallery()
       }, [])
 
-
+//Loops through galleryItem
     return (
         <div>
             <header className="App-header">
@@ -44,7 +45,7 @@ export function GalleryList() {
   }
 
 
-
+//------------------ UNNEDDED OR MOVED
   // const handleClick = () =>{
 //     console.log("clicked!")
         
