@@ -27,7 +27,25 @@ export function GalleryList() {
       }, [])
 
 
-// const handleClick = () =>{
+    return (
+        <div>
+            <header className="App-header">
+          <h1 className="App-title">Gallery of My Life</h1>
+        </header>
+        <p>Gallery goes here</p>
+        {galleryItem.map((item) => (
+            <GalleryItem 
+            key={item.id}
+            item={item}
+            getGallery={getGallery} />
+        ))}
+        </div>
+    )
+  }
+
+
+
+  // const handleClick = () =>{
 //     console.log("clicked!")
         
 // }
@@ -45,20 +63,3 @@ export function GalleryList() {
 //                 alert("Something went wrong!!!");
 //             });
 //     };
-
-
-    return (
-        <div>
-            <header className="App-header">
-          <h1 className="App-title">Gallery of My Life</h1>
-        </header>
-        <p>Gallery goes here</p>
-        {galleryItem.map((item) => (
-            <GalleryItem 
-            key={item.id}
-            item={item}
-            getGallery={getGallery} />
-        ))}
-        </div>
-    )
-  }
