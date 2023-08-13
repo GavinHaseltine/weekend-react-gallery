@@ -1,35 +1,64 @@
 import axios from "axios"
+import { useState, useEffect } from "react";
+import GalleryItem from "../GalleryItem/GalleryItem";
 
-export function GalleryList({galleryList}) {
+export function GalleryList() {
 
-const handleClick = () =>{
-    console.log("clicked!")
-        
-}
+    const [galleryItem, setGalleryItem] = useState([]);
 
- function handleLike (galleryItems) {
 
-    axios
-            .put(`/gallery/like/${galleryItems.id}`)
-            .then((response) => {
-                console.log("in handleLike", response)
-                //getGallery();
+
+
+    let getGallery = () => {
+        axios.get('/gallery')
+            .then(response => {
+                // console.log('Get response is', response.data)
+                setGalleryItem(response.data) // confirm this is the right thing to take here
+                console.log("in getGallery", response.data)
             })
-            .catch((error) => {
-                console.log(`Error in handleLike ${error}`);
-                alert("Something went wrong!!!");
-            });
-    };
+            .catch(error => {
+                console.log('error in GET:', error)
+            })
+      }
+      
+      
+      useEffect(() => {
+        getGallery()
+      }, [])
 
 
-    return <>
-      {galleryList?.map(galleryItems => (
-        <li key={galleryItems.id}>
-         <img onClick={handleClick} src={galleryItems.path}/>
-         <p> {galleryItems.description} </p>
-         <p> Number of likes: {galleryItems.likes} </p>
-         <button onClick={handleLike(galleryItems.id)}>Like This!!</button>
-        </li>
-      ))}
-    </>;
+// const handleClick = () =>{
+//     console.log("clicked!")
+        
+// }
+
+//  function handleLike (galleryItems) {
+
+//     axios
+//             .put(`/gallery/like/${galleryItems.id}`)
+//             .then((response) => {
+//                 console.log("in handleLike", response)
+//                 //getGallery();
+//             })
+//             .catch((error) => {
+//                 console.log(`Error in handleLike ${error}`);
+//                 alert("Something went wrong!!!");
+//             });
+//     };
+
+
+    return (
+        <div>
+            <header className="App-header">
+          <h1 className="App-title">Gallery of My Life</h1>
+        </header>
+        <p>Gallery goes here</p>
+        {galleryItem.map((item) => (
+            <GalleryItem 
+            key={item.id}
+            item={item}
+            getGallery={getGallery} />
+        ))}
+        </div>
+    )
   }
